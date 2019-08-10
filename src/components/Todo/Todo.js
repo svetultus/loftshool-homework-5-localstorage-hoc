@@ -1,19 +1,14 @@
 import React, { PureComponent } from 'react';
-import Card from '../Card';
 import './Todo.css';
 import withLocalstorage from '../../HOCs/withLocalstorage';
 
 class Todo extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
   data = this.props.savedData || [];
   state = {
     inputValue: ''
   };
 
   getId(savedData) {
-    //const { savedData } = this.props;
     const biggest = savedData
       ? savedData.reduce((acc, el) => Math.max(acc, el.id), 0)
       : 0;
@@ -47,6 +42,8 @@ class Todo extends PureComponent {
   };
 
   createNewRecord = () => {
+    if (this.state.inputValue === '') return null;
+
     const id = this.getId(this.data);
 
     this.data.push({ id, isComplete: false, text: this.state.inputValue });

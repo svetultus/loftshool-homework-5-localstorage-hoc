@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { load, save } from '../../localstorage';
 
 const withLocalstorage = (
@@ -9,16 +9,13 @@ const withLocalstorage = (
   class withLocalstorage extends React.Component {
     constructor(props) {
       super(props);
-      this.dataFromStorage = this.loadData(storageName);
-    }
-
-    loadData(storageName) {
-      return load(storageName);
+      this.dataFromStorage = load(storageName);
     }
 
     saveData(dataToSave) {
       save(storageName, dataToSave);
     }
+
     render() {
       return (
         <WrappedComponent
